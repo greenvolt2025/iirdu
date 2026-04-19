@@ -121,7 +121,7 @@ export default function ServicesSection() {
                 overflow-hidden">
 
                 {/* Popular badge - top right */}
-                {service.isPopular && (
+                {'isPopular' in service && service.isPopular && (
                   <div className="absolute top-3 right-3 z-10 flex items-center gap-1 px-2.5 py-1
                     bg-gradient-to-r from-gold-500 to-gold-600 text-navy-900 rounded-full
                     shadow-lg animate-pulse-subtle">
