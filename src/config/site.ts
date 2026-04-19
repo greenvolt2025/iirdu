@@ -17,6 +17,7 @@ export const siteConfig = {
 
   social: {
     telegram: "https://t.me/iirdu_org",
+    simplex: "https://smp19.simplex.im/a#_0vCOKheaLsRrESfF1PnuI-j3ZyCLcJ6baEFSnvzHic",
   },
 
   pricing: {

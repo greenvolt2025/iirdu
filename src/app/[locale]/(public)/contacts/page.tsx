@@ -364,7 +364,16 @@ ${formData.message}
                   <p className="text-slate-300 text-sm leading-relaxed">
                     {t("simplexDesc")}
                   </p>
-                  <div className="mt-4 flex items-center gap-2 text-xs text-green-400">
+                  <a
+                    href={siteConfig.social.simplex}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-4 inline-flex items-center gap-2 px-5 py-2.5 bg-green-500/20 hover:bg-green-500/30 border border-green-500/30 hover:border-green-400/50 rounded-lg text-green-300 hover:text-green-200 text-sm font-medium transition-all duration-300"
+                  >
+                    <Shield className="h-4 w-4" />
+                    {locale === "uk" ? "Написати в SimpleX" : "Message via SimpleX"}
+                  </a>
+                  <div className="mt-3 flex items-center gap-2 text-xs text-green-400/70">
                     <Shield className="h-3 w-3" />
                     <span>SimpleX Protocol</span>
                     <span className="text-slate-500">|</span>
