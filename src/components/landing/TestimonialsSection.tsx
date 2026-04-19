@@ -189,7 +189,7 @@ export default function TestimonialsSection() {
                 {/* Avatar with initials */}
                 <div className="w-14 h-14 bg-gradient-to-br from-gold-500 to-gold-600 rounded-full
                   flex items-center justify-center text-navy-900 font-bold text-xl shadow-lg">
-                  {activeTestimonial[`name${locale === "uk" ? "Uk" : "En"}` as keyof typeof activeTestimonial]
+                  {String(activeTestimonial[`name${locale === "uk" ? "Uk" : "En"}` as keyof typeof activeTestimonial])
                     .split(" ")
                     .map((n: string) => n[0])
                     .join("")}
