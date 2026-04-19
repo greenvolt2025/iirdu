@@ -87,39 +87,40 @@ export async function generateMetadata({
   };
 }
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "ResearchOrganization",
-  name: "Міжнародний інститут відновлення та розвитку України",
-  alternateName: ["МІВРУ", "IIRDU", "International Institute for Reconstruction and Development of Ukraine"],
-  description: "Приватна наукова установа. Науково-правові висновки за методикою RDNA/DaLA для RD4U, ЄСПЛ, ICC.",
-  foundingDate: "2022",
-  taxID: "45681824",
-  areaServed: ["UA", "EU", "International"],
-  knowsAbout: [
-    "Damage Assessment",
-    "RDNA/DaLA Methodology",
-    "Scientific-Legal Conclusions",
-    "Risk Assessment",
-    "Due Diligence",
-    "CBAM",
-    "CSRD",
-    "ESIA",
-    "FIDIC Claims",
-  ],
-  hasOfferCatalog: {
-    "@type": "OfferCatalog",
-    name: "Scientific-Legal Conclusions",
-    itemListElement: [
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Damage Assessment (RDNA/DaLA)" } },
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Risk Assessment (ISO 31000)" } },
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "EU Due Diligence (CBAM, CSRD, CSDDD)" } },
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "ESIA / Environmental Impact Assessment" } },
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "FIDIC Claims Support" } },
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Contract Risk Analysis" } },
-    ],
-  },
-};
+// Structured data for SEO (disabled for static export)
+// const jsonLd = {
+//   "@context": "https://schema.org",
+//   "@type": "ResearchOrganization",
+//   name: "Міжнародний інститут відновлення та розвитку України",
+//   alternateName: ["МІВРУ", "IIRDU", "International Institute for Reconstruction and Development of Ukraine"],
+//   description: "Приватна наукова установа. Науково-правові висновки за методикою RDNA/DaLA для RD4U, ЄСПЛ, ICC.",
+//   foundingDate: "2022",
+//   taxID: "45681824",
+//   areaServed: ["UA", "EU", "International"],
+//   knowsAbout: [
+//     "Damage Assessment",
+//     "RDNA/DaLA Methodology",
+//     "Scientific-Legal Conclusions",
+//     "Risk Assessment",
+//     "Due Diligence",
+//     "CBAM",
+//     "CSRD",
+//     "ESIA",
+//     "FIDIC Claims",
+//   ],
+//   hasOfferCatalog: {
+//     "@type": "OfferCatalog",
+//     name: "Scientific-Legal Conclusions",
+//     itemListElement: [
+//       { "@type": "Offer", itemOffered: { "@type": "Service", name: "Damage Assessment (RDNA/DaLA)" } },
+//       { "@type": "Offer", itemOffered: { "@type": "Service", name: "Risk Assessment (ISO 31000)" } },
+//       { "@type": "Offer", itemOffered: { "@type": "Service", name: "EU Due Diligence (CBAM, CSRD, CSDDD)" } },
+//       { "@type": "Offer", itemOffered: { "@type": "Service", name: "ESIA / Environmental Impact Assessment" } },
+//       { "@type": "Offer", itemOffered: { "@type": "Service", name: "FIDIC Claims Support" } },
+//       { "@type": "Offer", itemOffered: { "@type": "Service", name: "Contract Risk Analysis" } },
+//     ],
+//   },
+// };
 
 export default async function LocaleLayout({
   children,

@@ -7,7 +7,6 @@ import {
   Home,
   Building2,
   FileText,
-  Phone,
   MessageCircle,
   CheckCircle,
   Info,

@@ -180,7 +180,7 @@ export default function TestimonialsSection() {
 
             {/* Testimonial text */}
             <blockquote className="text-xl lg:text-2xl font-serif text-white/90 leading-relaxed mb-8 italic">
-              "{activeTestimonial[`text${locale === "uk" ? "Uk" : "En"}` as keyof typeof activeTestimonial]}"
+              &ldquo;{activeTestimonial[`text${locale === "uk" ? "Uk" : "En"}` as keyof typeof activeTestimonial]}&rdquo;
             </blockquote>
 
             {/* Author info */}

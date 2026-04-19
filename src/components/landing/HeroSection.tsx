@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { useParams } from "next/navigation";
-import { Mail, Shield, FileText, CheckCircle, Users, Building2, Landmark, Globe, Award, Sparkles, Clock, Euro } from "lucide-react";
+import { Shield, FileText, CheckCircle, Users, Building2, Landmark, Globe, Award, Sparkles, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SERVICE_CATEGORIES } from "@/config/services-catalog";
 import { siteConfig } from "@/config/site";

@@ -51,12 +51,12 @@ export async function listModels(
   }
 }
 
-interface OllamaResult {
-  success: boolean;
-  data?: string;
-  error?: string;
-  source: "ollama";
-}
+// interface OllamaResult {
+//   success: boolean;
+//   data?: string;
+//   error?: string;
+//   source: "ollama";
+// }
 
 /**
  * Generate a report via Ollama chat API (non-streaming).
