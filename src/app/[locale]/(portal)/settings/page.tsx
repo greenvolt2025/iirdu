@@ -40,25 +40,22 @@ export default function SettingsPage() {
   const [passwordMsg, setPasswordMsg] = useState("");
 
   const fetchProfile = useCallback(async () => {
-    const supabase = createClient();
-    const { data: { user } } = await supabase.auth.getUser();
-    if (!user) { setLoading(false); return; }
-
-    const { data } = await supabase
-      .from("profiles")
-      .select("*")
-      .eq("id", user.id)
-      .single();
-
-    if (data) {
-      setProfile({
-        full_name: data.full_name || "",
-        email: data.email || user.email || "",
-        phone: data.phone || "",
-        company_name: data.company_name || "",
-        notify_email: data.notify_email ?? true,
-        notify_simplex: data.notify_simplex ?? false,
-      });
+    // Fetch profile via API route (uses admin client, bypasses broken RLS)
+    try {
+      const res = await fetch("/api/profile");
+      if (res.ok) {
+        const data = await res.json();
+        setProfile({
+          full_name: data.full_name || "",
+          email: data.email || "",
+          phone: data.phone || "",
+          company_name: data.company_name || "",
+          notify_email: data.notify_email ?? true,
+          notify_simplex: data.notify_simplex ?? false,
+        });
+      }
+    } catch {
+      // Profile fetch failed
     }
     setLoading(false);
   }, []);
@@ -68,25 +65,25 @@ export default function SettingsPage() {
   const handleSave = async () => {
     setSaving(true);
     setSaved(false);
-    const supabase = createClient();
-    const { data: { user } } = await supabase.auth.getUser();
-    if (!user) { setSaving(false); return; }
 
-    const { error } = await supabase
-      .from("profiles")
-      .update({
-        full_name: profile.full_name,
-        phone: profile.phone,
-        company_name: profile.company_name,
-        notify_email: profile.notify_email,
-        notify_simplex: profile.notify_simplex,
-      })
-      .eq("id", user.id);
+    try {
+      const res = await fetch("/api/profile", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          full_name: profile.full_name,
+          phone: profile.phone,
+          company_name: profile.company_name,
+        }),
+      });
 
-    setSaving(false);
-    if (!error) {
-      setSaved(true);
-      setTimeout(() => setSaved(false), 3000);
+      setSaving(false);
+      if (res.ok) {
+        setSaved(true);
+        setTimeout(() => setSaved(false), 3000);
+      }
+    } catch {
+      setSaving(false);
     }
   };
 

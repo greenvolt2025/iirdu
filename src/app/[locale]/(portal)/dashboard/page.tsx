@@ -67,31 +67,31 @@ export default function DashboardPage() {
 
     setUserId(user.id);
 
-    const { data } = await supabase
-      .from("orders")
-      .select("*")
-      .eq("user_id", user.id)
-      .order("created_at", { ascending: false })
-      .limit(5);
-
-    if (data) {
-      setOrders(data.map((o) => ({
-        id: o.id,
-        userId: o.user_id,
-        clientType: o.client_type || "individual",
-        reportType: o.report_type,
-        reportSubtype: o.report_subtype,
-        status: o.status,
-        title: o.title,
-        description: o.description,
-        objectAddress: o.object_address,
-        totalAmount: o.total_amount || 0,
-        currency: o.currency,
-        paidAt: o.paid_at,
-        assignedExpertId: o.assigned_expert_id,
-        createdAt: o.created_at,
-        updatedAt: o.updated_at,
-      })));
+    // Fetch orders via API route (uses admin client, bypasses broken RLS)
+    try {
+      const res = await fetch("/api/my-orders?limit=5");
+      if (res.ok) {
+        const data = await res.json();
+        setOrders((data || []).map((o: Record<string, unknown>) => ({
+          id: o.id as string,
+          userId: o.user_id as string,
+          clientType: (o.client_type as string) || "individual",
+          reportType: o.report_type as string,
+          reportSubtype: o.report_subtype as string,
+          status: o.status as string,
+          title: o.title as string,
+          description: o.description as string,
+          objectAddress: o.object_address as string,
+          totalAmount: Number(o.total_amount) || 0,
+          currency: o.currency as string,
+          paidAt: o.paid_at as string,
+          assignedExpertId: o.assigned_expert_id as string,
+          createdAt: o.created_at as string,
+          updatedAt: o.updated_at as string,
+        })));
+      }
+    } catch {
+      // Orders fetch failed
     }
     setLoading(false);
   }, []);

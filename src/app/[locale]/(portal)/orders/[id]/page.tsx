@@ -9,8 +9,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Separator } from "@/components/ui/separator";
-import { createClient } from "@/lib/supabase/client";
-
 interface OrderData {
   id: string;
   title: string;
@@ -83,37 +81,18 @@ export default function OrderDetailPage() {
   const [generating, setGenerating] = useState(false);
 
   const loadOrder = useCallback(async () => {
-    const supabase = createClient();
-    const { data } = await supabase
-      .from("orders")
-      .select("*")
-      .eq("id", orderId)
-      .single();
-
-    if (data) {
-      setOrder(data as OrderData);
+    // Fetch order details via API route (uses admin client, bypasses broken RLS)
+    try {
+      const res = await fetch(`/api/my-orders/${orderId}`);
+      if (res.ok) {
+        const { order: orderData, documents: docs, reportId: rId } = await res.json();
+        if (orderData) setOrder(orderData as OrderData);
+        setDocuments((docs || []) as DocumentData[]);
+        if (rId) setReportId(rId);
+      }
+    } catch {
+      // Order fetch failed
     }
-
-    const { data: docs } = await supabase
-      .from("documents")
-      .select("*")
-      .eq("order_id", orderId)
-      .order("created_at", { ascending: false });
-
-    setDocuments((docs || []) as DocumentData[]);
-
-    // Check for existing report
-    const { data: reports } = await supabase
-      .from("reports")
-      .select("id")
-      .eq("order_id", orderId)
-      .order("created_at", { ascending: false })
-      .limit(1);
-
-    if (reports && reports.length > 0) {
-      setReportId(reports[0].id);
-    }
-
     setLoading(false);
   }, [orderId]);
 

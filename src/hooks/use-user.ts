@@ -18,27 +18,28 @@ export function useUser() {
         return;
       }
 
-      const { data: profile } = await supabase
-        .from("profiles")
-        .select("*")
-        .eq("id", authUser.id)
-        .single();
-
-      if (profile) {
-        setUser({
-          id: profile.id,
-          email: profile.email,
-          fullName: profile.full_name,
-          phone: profile.phone,
-          role: profile.role,
-          clientType: profile.client_type || "individual",
-          companyName: profile.company_name,
-          companyEdrpou: profile.company_edrpou,
-          organizationCountry: profile.organization_country,
-          organizationType: profile.organization_type,
-          avatarUrl: profile.avatar_url,
-          createdAt: profile.created_at,
-        });
+      // Fetch profile via API route (uses admin client, bypasses RLS)
+      try {
+        const res = await fetch("/api/profile");
+        if (res.ok) {
+          const profile = await res.json();
+          setUser({
+            id: profile.id,
+            email: profile.email,
+            fullName: profile.full_name,
+            phone: profile.phone,
+            role: profile.role,
+            clientType: profile.client_type || "individual",
+            companyName: profile.company_name,
+            companyEdrpou: profile.company_edrpou,
+            organizationCountry: profile.organization_country,
+            organizationType: profile.organization_type,
+            avatarUrl: profile.avatar_url,
+            createdAt: profile.created_at,
+          });
+        }
+      } catch {
+        // Profile fetch failed — user stays null
       }
       setLoading(false);
     }

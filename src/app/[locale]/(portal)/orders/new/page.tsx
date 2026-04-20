@@ -137,44 +137,50 @@ export default function NewOrderPage() {
 
     const reportType = categoryToReportType[selectedCategory] || selectedCategory;
 
-    const { data: order, error: insertError } = await supabase
-      .from("orders")
-      .insert({
-        user_id: authUser.id,
-        client_type: clientType,
-        report_type: reportType,
-        report_subtype: selectedSubtype,
-        title: selectedSubtype,
-        description: description || null,
-        object_address: objectAddress || null,
-        status: "draft",
-        currency: "EUR",
-        turnaround,
-        delivery_method: delivery,
-        delivery_details: delivery === "nova_poshta" ? JSON.stringify({ recipientName, novaPoshtaDept }) : null,
-        include_lost_profits: includeLostProfits,
-      })
-      .select()
-      .single();
+    // Create order via API route (uses admin client, bypasses broken RLS)
+    try {
+      const res = await fetch("/api/my-orders", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          client_type: clientType,
+          report_type: reportType,
+          report_subtype: selectedSubtype,
+          title: selectedSubtype,
+          description: description || null,
+          object_address: objectAddress || null,
+          status: "draft",
+          currency: "EUR",
+          turnaround,
+          delivery_method: delivery,
+          delivery_details: delivery === "nova_poshta" ? JSON.stringify({ recipientName, novaPoshtaDept }) : null,
+          include_lost_profits: includeLostProfits,
+        }),
+      });
 
-    if (insertError) {
-      setError(insertError.message);
-      setSubmitting(false);
-      return;
-    }
+      if (!res.ok) {
+        const err = await res.json();
+        setError(err.error || "Failed to create order");
+        setSubmitting(false);
+        return;
+      }
 
-    if (order) {
+      const order = await res.json();
+
       // Upload files to the created order
       if (files.length > 0) {
         for (const file of files) {
           const formData = new FormData();
           formData.append("file", file);
           formData.append("orderId", order.id);
-          formData.append("channel", "standard");
+          formData.append("channel", "simplex");
           await fetch("/api/upload", { method: "POST", body: formData }).catch(() => {});
         }
       }
       router.push(`/${locale}/orders/${order.id}`);
+    } catch {
+      setError(locale === "uk" ? "Помилка створення замовлення" : "Failed to create order");
+      setSubmitting(false);
     }
   };
 

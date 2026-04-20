@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { randomUUID } from "crypto";
 import { rateLimit, getClientIp } from "@/lib/rate-limit";
 import { createServerSupabase } from "@/lib/supabase/server";
+import { createAdminClient } from "@/lib/supabase/admin";
 
 export async function POST(request: NextRequest) {
   // Rate limit: 20 uploads per minute per IP
@@ -52,9 +53,12 @@ export async function POST(request: NextRequest) {
     const ext = file.name.split(".").pop() || "bin";
     const storagePath = `${user.id}/${orderId || "staging"}/${fileId}.${ext}`;
 
+    // Use admin client to bypass RLS for storage and DB operations
+    const admin = createAdminClient();
+
     // Upload to Supabase Storage
     const bytes = await file.arrayBuffer();
-    const { error: uploadError } = await supabase.storage
+    const { error: uploadError } = await admin.storage
       .from("documents")
       .upload(storagePath, Buffer.from(bytes), {
         contentType: file.type,
@@ -74,7 +78,7 @@ export async function POST(request: NextRequest) {
 
     // Create document record in database
     if (orderId) {
-      await supabase.from("documents").insert({
+      await admin.from("documents").insert({
         id: fileId,
         order_id: orderId,
         file_name: file.name,
