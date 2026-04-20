@@ -8,23 +8,28 @@ const intlMiddleware = createIntlMiddleware({
 });
 
 export async function middleware(request: NextRequest) {
-  // 1. Run Supabase session refresh + auth check
-  const supabaseResponse = await updateSession(request);
+  try {
+    // 1. Run Supabase session refresh + auth check
+    const supabaseResponse = await updateSession(request);
 
-  // If Supabase returned a redirect (unauthenticated on portal route), use it
-  if (supabaseResponse.headers.get("location")) {
-    return supabaseResponse;
+    // If Supabase returned a redirect (unauthenticated on portal route), use it
+    if (supabaseResponse.headers.get("location")) {
+      return supabaseResponse;
+    }
+
+    // 2. Run next-intl middleware for locale routing
+    const intlResponse = intlMiddleware(request);
+
+    // 3. Copy Supabase cookies onto the intl response so refreshed JWT tokens aren't lost
+    supabaseResponse.cookies.getAll().forEach((cookie) => {
+      intlResponse.cookies.set(cookie.name, cookie.value, cookie);
+    });
+
+    return intlResponse;
+  } catch {
+    // If Supabase auth fails, fall back to intl-only middleware
+    return intlMiddleware(request);
   }
-
-  // 2. Run next-intl middleware for locale routing
-  const intlResponse = intlMiddleware(request);
-
-  // 3. Copy Supabase cookies onto the intl response so refreshed JWT tokens aren't lost
-  supabaseResponse.cookies.getAll().forEach((cookie) => {
-    intlResponse.cookies.set(cookie.name, cookie.value, cookie);
-  });
-
-  return intlResponse;
 }
 
 export const config = {
