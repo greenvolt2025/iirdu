@@ -2,12 +2,12 @@
 
 import { useCallback, useState } from "react";
 import { useTranslations } from "next-intl";
+import { useParams } from "next/navigation";
 import { useDropzone } from "react-dropzone";
-import { Upload, X, FileText, Image, Shield, ShieldCheck } from "lucide-react";
+import { Upload, X, FileText, Image, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
-import type { UploadChannel } from "@/types";
 
 interface DocumentUploadProps {
   files: File[];
@@ -19,7 +19,6 @@ interface UploadingFile {
   file: File;
   progress: number;
   status: "uploading" | "complete" | "error";
-  channel: UploadChannel;
 }
 
 const ACCEPTED_TYPES = {
@@ -31,10 +30,10 @@ const ACCEPTED_TYPES = {
 
 const MAX_SIZE = 1024 * 1024 * 1024; // 1 GB
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function DocumentUpload({ files, onFilesChange, orderId }: DocumentUploadProps) {
   const t = useTranslations("upload");
-  const [channel, setChannel] = useState<UploadChannel>("standard");
+  const params = useParams();
+  const locale = params.locale as string;
   const [uploading, setUploading] = useState<UploadingFile[]>([]);
 
   const onDrop = useCallback(
@@ -45,16 +44,15 @@ export default function DocumentUpload({ files, onFilesChange, orderId }: Docume
         file,
         progress: 0,
         status: "uploading" as const,
-        channel,
       }));
       setUploading((prev) => [...prev, ...newUploads]);
 
-      // Upload each file to the server
+      // Upload each file via secure channel (SimpleX transparent)
       for (const upload of newUploads) {
         try {
           const formData = new FormData();
           formData.append("file", upload.file);
-          formData.append("channel", channel);
+          formData.append("channel", "simplex");
           if (orderId) formData.append("orderId", orderId);
 
           // Use XMLHttpRequest for real progress tracking
@@ -95,7 +93,7 @@ export default function DocumentUpload({ files, onFilesChange, orderId }: Docume
         }
       }
     },
-    [files, onFilesChange, channel, orderId]
+    [files, onFilesChange, orderId]
   );
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -124,53 +122,18 @@ export default function DocumentUpload({ files, onFilesChange, orderId }: Docume
 
   return (
     <div className="space-y-4">
-      {/* Channel selector */}
-      <div className="grid grid-cols-2 gap-3">
-        <button
-          onClick={() => setChannel("standard")}
-          className={cn(
-            "p-4 rounded-lg border text-left transition-all",
-            channel === "standard"
-              ? "border-blue-500 bg-blue-50 ring-1 ring-blue-500"
-              : "hover:border-gray-400"
-          )}
-        >
-          <div className="flex items-center gap-2 mb-1">
-            <Shield className="h-4 w-4 text-blue-600" />
-            <span className="font-medium text-sm">{t("standardChannel")}</span>
-          </div>
-          <p className="text-xs text-muted-foreground">{t("standardDesc")}</p>
-        </button>
-
-        <button
-          onClick={() => setChannel("simplex")}
-          className={cn(
-            "p-4 rounded-lg border text-left transition-all",
-            channel === "simplex"
-              ? "border-green-500 bg-green-50 ring-1 ring-green-500"
-              : "hover:border-gray-400"
-          )}
-        >
-          <div className="flex items-center gap-2 mb-1">
-            <ShieldCheck className="h-4 w-4 text-green-600" />
-            <span className="font-medium text-sm">{t("simplexChannel")}</span>
-          </div>
-          <p className="text-xs text-muted-foreground">{t("simplexDesc")}</p>
-        </button>
-      </div>
-
-      {/* SimpleX info banner */}
-      {channel === "simplex" && (
-        <div className="p-3 bg-green-50 border border-green-200 rounded-lg text-sm text-green-800 flex items-start gap-2">
-          <ShieldCheck className="h-4 w-4 mt-0.5 shrink-0" />
-          <div>
-            <p className="font-medium">{t("secureTransfer")}</p>
-            <p className="text-xs mt-1 text-green-700">
-              SimpleX Protocol &mdash; E2E encryption, no metadata, no user identifiers
-            </p>
-          </div>
+      {/* Secure channel indicator */}
+      <div className="p-3 bg-green-50 border border-green-200 rounded-lg text-sm text-green-800 flex items-start gap-2">
+        <ShieldCheck className="h-4 w-4 mt-0.5 shrink-0" />
+        <div>
+          <p className="font-medium">{locale === "uk" ? "Захищений канал передачі" : "Secure transfer channel"}</p>
+          <p className="text-xs mt-1 text-green-700">
+            {locale === "uk"
+              ? "Наскрізне шифрування, без метаданих, без ідентифікаторів"
+              : "End-to-end encryption, no metadata, no user identifiers"}
+          </p>
         </div>
-      )}
+      </div>
 
       {/* Dropzone */}
       <div
@@ -218,7 +181,7 @@ export default function DocumentUpload({ files, onFilesChange, orderId }: Docume
                         {upload.status === "error" && "✗"}
                       </span>
                     )}
-                    {upload?.channel === "simplex" && (
+                    {upload?.status === "complete" && (
                       <ShieldCheck className="h-3 w-3 text-green-600" />
                     )}
                   </div>

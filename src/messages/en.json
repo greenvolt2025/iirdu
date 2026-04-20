@@ -29,9 +29,9 @@
   },
   "hero": {
     "title": "International Institute for Reconstruction and Development of Ukraine",
-    "subtitle": "Upload your documents — we'll prepare a conclusion for RD4U, ECHR, or ICC. We use World Bank's RDNA/DaLA methodology. We help individuals, businesses, and international partners.",
-    "cta": "Upload Documents",
-    "ctaSecondary": "Conclusion Types"
+    "subtitle": "We prepare scientific-legal conclusions for submission to RD4U, ICC, or ECHR. World Bank RDNA/DaLA methodology. For individuals, businesses, and international partners.",
+    "cta": "Submit Application",
+    "ctaSecondary": "How It Works"
   },
   "services": {
     "title": "Our Services",
@@ -211,10 +211,10 @@
     "cosoDesc": "Risk assessment frameworks for EU and US markets"
   },
   "cta": {
-    "title": "Need a report for RD4U?",
-    "subtitle": "Order a free consultation — we'll help you choose the research type and prepare a comprehensive RDNA methodology report",
-    "ctaPrimary": "Order Research",
-    "ctaSecondary": "Contact Us",
+    "title": "Need a conclusion for RD4U or ICC?",
+    "subtitle": "Register, upload your documents — we'll prepare a conclusion using the RDNA/DaLA methodology. Consultation is free.",
+    "ctaPrimary": "Submit Application",
+    "ctaSecondary": "How It Works",
     "trustFree": "Free consultation",
     "trustConfidential": "Confidentiality guaranteed",
     "trustResponse": "Response within 24 hours"
@@ -270,8 +270,8 @@
     "formMessage": "Message",
     "formMessagePlaceholder": "Describe your question or needs...",
     "formSubmit": "Send Message",
-    "simplexTitle": "Confidential Communication Channel",
-    "simplexDesc": "For transferring confidential documents, use the secure SimpleX channel with end-to-end encryption and no metadata collection. Contact us to receive connection details."
+    "simplexTitle": "Secure SimpleX Channel",
+    "simplexDesc": "End-to-end encryption, no metadata, no user identifiers. Your documents are sent directly to our team via the decentralized SimpleX protocol."
   },
   "servicesPage": {
     "heroTitle": "Our Services",

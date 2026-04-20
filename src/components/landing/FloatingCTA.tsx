@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import { useParams } from "next/navigation";
 import { Send, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -41,7 +42,7 @@ export default function FloatingCTA() {
           </button>
 
           {/* Main button with pulse animation */}
-          <a href="mailto:iirdu@proton.me">
+          <Link href={`/${locale}/register`}>
             <Button
               size="lg"
               className="w-16 h-16 rounded-full bg-gradient-to-r from-gold-500 to-gold-600
@@ -57,7 +58,7 @@ export default function FloatingCTA() {
               <Send className="h-7 w-7 text-navy-900 relative z-10
                 group-hover:scale-110 transition-transform duration-300" />
             </Button>
-          </a>
+          </Link>
 
           {/* Tooltip */}
           <div className="absolute bottom-full right-0 mb-3 opacity-0 group-hover:opacity-100
@@ -111,7 +112,7 @@ export default function FloatingCTA() {
                 <X className="h-5 w-5" />
               </button>
 
-              <a href="mailto:iirdu@proton.me">
+              <Link href={`/${locale}/register`}>
                 <Button
                   size="lg"
                   className="bg-gradient-to-r from-gold-500 to-gold-600
@@ -120,9 +121,9 @@ export default function FloatingCTA() {
                     transition-all duration-300 hover:scale-105"
                 >
                   <Send className="mr-2 h-4 w-4" />
-                  {locale === "uk" ? "Замовити зараз" : "Order now"}
+                  {locale === "uk" ? "Подати заявку" : "Apply now"}
                 </Button>
-              </a>
+              </Link>
             </div>
           </div>
         </div>

@@ -1,30 +1,31 @@
 "use client";
 
+import Link from "next/link";
 import { useParams } from "next/navigation";
 import {
   ArrowRight,
-  MessageCircle,
   Shield,
   Clock,
+  Sparkles,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const uk = {
-  title: "Завантажте документи — отримайте висновок",
+  title: "Потрібен висновок для RD4U або ICC?",
   subtitle:
-    "Завантажте необхідні документи через захищений канал. Наші фахівці підготують науково-правовий висновок за методикою RDNA/DaLA Світового банку. Якщо документів недостатньо — повідомимо.",
-  ctaPrimary: "Завантажити документи",
-  ctaSecondary: "Переглянути напрямки",
+    "Зареєструйтесь, завантажте документи — ми підготуємо науково-правовий висновок за методикою RDNA/DaLA. Консультація безкоштовна.",
+  ctaPrimary: "Подати заявку",
+  ctaSecondary: "Як це працює",
   trustConfidential: "Конфіденційність гарантована",
   trustResponse: "Відповідь протягом 24 годин",
 };
 
 const en = {
-  title: "Upload documents — get a conclusion",
+  title: "Need a conclusion for RD4U or ICC?",
   subtitle:
-    "Upload necessary documents via a secure channel. Our experts will prepare a scientific-legal conclusion using the World Bank RDNA/DaLA methodology. If documents are insufficient — we'll let you know.",
-  ctaPrimary: "Upload Documents",
-  ctaSecondary: "View Directions",
+    "Register, upload your documents — we'll prepare a scientific-legal conclusion using the RDNA/DaLA methodology. Consultation is free.",
+  ctaPrimary: "Submit Application",
+  ctaSecondary: "How It Works",
   trustConfidential: "Confidentiality guaranteed",
   trustResponse: "Response within 24 hours",
 };
@@ -61,25 +62,25 @@ export default function CTASection() {
 
             {/* Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-              <a href="mailto:iirdu@proton.me">
+              <Link href={`/${locale}/register`}>
                 <Button
                   size="lg"
                   className="bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-600 hover:to-gold-700 text-navy-900 font-bold text-base px-10 h-14 shadow-gold-glow transition-all duration-300 hover:scale-105"
                 >
-                  <ArrowRight className="mr-2 h-5 w-5" />
+                  <Sparkles className="mr-2 h-5 w-5" />
                   {t.ctaPrimary}
                 </Button>
-              </a>
-              <a href="#contacts">
+              </Link>
+              <Link href={`/${locale}/how-to-apply`}>
                 <Button
                   size="lg"
                   variant="outline"
                   className="border-white/20 text-white hover:bg-white/10 text-base px-10 h-14"
                 >
-                  <MessageCircle className="mr-2 h-4 w-4" />
+                  <ArrowRight className="mr-2 h-4 w-4" />
                   {t.ctaSecondary}
                 </Button>
-              </a>
+              </Link>
             </div>
 
             {/* Trust indicators */}
