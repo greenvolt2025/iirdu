@@ -30,7 +30,7 @@ export async function updateSession(request: NextRequest) {
   } = await supabase.auth.getUser();
 
   const pathname = request.nextUrl.pathname;
-  const isPortalRoute = pathname.includes("/dashboard") || pathname.includes("/orders") || pathname.includes("/documents") || pathname.includes("/settings");
+  const isPortalRoute = pathname.includes("/dashboard") || pathname.includes("/orders") || pathname.includes("/documents") || pathname.includes("/settings") || pathname.includes("/admin");
 
   if (!user && isPortalRoute) {
     const locale = pathname.split("/")[1] || "uk";

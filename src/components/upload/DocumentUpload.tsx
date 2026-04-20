@@ -38,10 +38,9 @@ export default function DocumentUpload({ files, onFilesChange, orderId }: Docume
   const [uploading, setUploading] = useState<UploadingFile[]>([]);
 
   const onDrop = useCallback(
-    (accepted: File[]) => {
+    async (accepted: File[]) => {
       onFilesChange([...files, ...accepted]);
 
-      // Simulate upload progress
       const newUploads: UploadingFile[] = accepted.map((file) => ({
         file,
         progress: 0,
@@ -50,26 +49,53 @@ export default function DocumentUpload({ files, onFilesChange, orderId }: Docume
       }));
       setUploading((prev) => [...prev, ...newUploads]);
 
-      // Simulate progress for each file
-      newUploads.forEach((upload, index) => {
-        const interval = setInterval(() => {
-          setUploading((prev) =>
-            prev.map((u) => {
-              if (u.file !== upload.file) return u;
-              const newProgress = Math.min(u.progress + Math.random() * 30, 100);
-              return {
-                ...u,
-                progress: newProgress,
-                status: newProgress >= 100 ? "complete" : "uploading",
-              };
-            })
-          );
-        }, 500 + index * 200);
+      // Upload each file to the server
+      for (const upload of newUploads) {
+        try {
+          const formData = new FormData();
+          formData.append("file", upload.file);
+          formData.append("channel", channel);
+          if (orderId) formData.append("orderId", orderId);
 
-        setTimeout(() => clearInterval(interval), 5000);
-      });
+          // Use XMLHttpRequest for real progress tracking
+          await new Promise<void>((resolve, reject) => {
+            const xhr = new XMLHttpRequest();
+            xhr.upload.onprogress = (e) => {
+              if (e.lengthComputable) {
+                const percent = Math.round((e.loaded / e.total) * 100);
+                setUploading((prev) =>
+                  prev.map((u) =>
+                    u.file === upload.file ? { ...u, progress: percent } : u
+                  )
+                );
+              }
+            };
+            xhr.onload = () => {
+              if (xhr.status >= 200 && xhr.status < 300) {
+                setUploading((prev) =>
+                  prev.map((u) =>
+                    u.file === upload.file ? { ...u, progress: 100, status: "complete" } : u
+                  )
+                );
+                resolve();
+              } else {
+                reject(new Error(`Upload failed: ${xhr.statusText}`));
+              }
+            };
+            xhr.onerror = () => reject(new Error("Network error"));
+            xhr.open("POST", "/api/upload");
+            xhr.send(formData);
+          });
+        } catch {
+          setUploading((prev) =>
+            prev.map((u) =>
+              u.file === upload.file ? { ...u, status: "error" } : u
+            )
+          );
+        }
+      }
     },
-    [files, onFilesChange, channel]
+    [files, onFilesChange, channel, orderId]
   );
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({

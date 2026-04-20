@@ -31,7 +31,11 @@ export function useUser() {
           fullName: profile.full_name,
           phone: profile.phone,
           role: profile.role,
+          clientType: profile.client_type || "individual",
           companyName: profile.company_name,
+          companyEdrpou: profile.company_edrpou,
+          organizationCountry: profile.organization_country,
+          organizationType: profile.organization_type,
           avatarUrl: profile.avatar_url,
           createdAt: profile.created_at,
         });

@@ -50,7 +50,7 @@ export async function POST(request: NextRequest) {
 
     const fileId = randomUUID();
     const ext = file.name.split(".").pop() || "bin";
-    const storagePath = `${orderId || "general"}/${fileId}.${ext}`;
+    const storagePath = `${user.id}/${orderId || "staging"}/${fileId}.${ext}`;
 
     // Upload to Supabase Storage
     const bytes = await file.arrayBuffer();

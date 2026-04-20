@@ -1,6 +1,7 @@
 // ============ User & Auth ============
 
 export type UserRole = "client" | "expert" | "admin";
+export type ClientType = "individual" | "legal_entity" | "international_partner";
 
 export interface User {
   id: string;
@@ -8,7 +9,11 @@ export interface User {
   fullName: string;
   phone?: string;
   role: UserRole;
+  clientType: ClientType;
   companyName?: string;
+  companyEdrpou?: string;
+  organizationCountry?: string;
+  organizationType?: string;
   avatarUrl?: string;
   createdAt: string;
 }
@@ -37,6 +42,7 @@ export type ReportType =
 export interface Order {
   id: string;
   userId: string;
+  clientType: ClientType;
   reportType: ReportType;
   reportSubtype: string;
   status: OrderStatus;

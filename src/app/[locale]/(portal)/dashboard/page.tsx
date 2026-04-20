@@ -78,6 +78,7 @@ export default function DashboardPage() {
       setOrders(data.map((o) => ({
         id: o.id,
         userId: o.user_id,
+        clientType: o.client_type || "individual",
         reportType: o.report_type,
         reportSubtype: o.report_subtype,
         status: o.status,
