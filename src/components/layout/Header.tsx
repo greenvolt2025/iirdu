@@ -7,7 +7,6 @@ import { useState, useEffect } from "react";
 import { Menu, Globe, Phone, Mail, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
-import { siteConfig } from "@/config/site";
 
 export default function Header() {
   const t = useTranslations("nav");
@@ -25,19 +24,19 @@ export default function Header() {
   }, []);
 
   const serviceSubItems = [
+    { href: `/${locale}/individuals`, label: locale === "uk" ? "Фізичним особам" : "For Individuals" },
+    { href: `/${locale}/business`, label: locale === "uk" ? "Для бізнесу" : "For Business" },
+    { href: `/${locale}/government`, label: locale === "uk" ? "Для держави та громад" : "For Government" },
+    { href: `/${locale}/international`, label: locale === "uk" ? "Міжнародним партнерам" : "International Partners" },
     { href: `/${locale}#services`, label: locale === "uk" ? "Усі послуги" : "All Services" },
-    { href: `/${locale}/conclusion`, label: locale === "uk" ? "Науково-правовий висновок" : "Scientific-Legal Conclusion" },
-    { href: `/${locale}/risk-assessment`, label: t("riskAssessment") },
-    { href: `/${locale}/eu-compliance`, label: t("euCompliance") },
-    { href: `/${locale}/calculator`, label: locale === "uk" ? "Калькулятор DaLA" : "DaLA Calculator" },
   ];
 
   const navItems = [
     { href: `/${locale}`, label: t("home") },
-    { href: `/${locale}/hub`, label: locale === "uk" ? "Хаб" : "Hub" },
+    { href: `/${locale}/how-to-apply`, label: locale === "uk" ? "Як подати заявку" : "How to Apply" },
     { href: `/${locale}/pricing`, label: locale === "uk" ? "Ціни" : "Pricing" },
     { href: `/${locale}#about`, label: t("about") },
-    { href: `/${locale}#contacts`, label: t("contacts") },
+    { href: `/${locale}/contacts`, label: t("contacts") },
   ];
 
   return (
@@ -153,11 +152,11 @@ export default function Header() {
           </nav>
 
           <div className="flex items-center gap-3">
-            <a href={`mailto:${siteConfig.email}?subject=${encodeURIComponent(locale === "uk" ? "Запит на консультацію" : "Consultation Request")}`} className="hidden sm:block">
+            <Link href={`/${locale}/register`} className="hidden sm:block">
               <Button size="sm" className="bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-600 hover:to-gold-700 text-navy-900 font-semibold shadow-gold-glow transition-all duration-300 hover:scale-105">
-                {locale === "uk" ? "Написати лист" : "Send Email"}
+                {locale === "uk" ? "Подати заявку" : "Apply Now"}
               </Button>
-            </a>
+            </Link>
             {scrolled && (
               <Link
                 href={`/${otherLocale}`}

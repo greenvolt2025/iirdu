@@ -6,7 +6,6 @@ import { useParams } from "next/navigation";
 import { Shield, FileText, CheckCircle, Users, Building2, Landmark, Globe, Award, Sparkles, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SERVICE_CATEGORIES } from "@/config/services-catalog";
-import { siteConfig } from "@/config/site";
 
 export default function HeroSection() {
   const t = useTranslations("hero");
@@ -59,16 +58,16 @@ export default function HeroSection() {
 
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-6">
-              <a href={`mailto:${siteConfig.email}?subject=${encodeURIComponent(locale === "uk" ? "Запит на науково-правовий висновок" : "Request for Scientific-Legal Conclusion")}&body=${encodeURIComponent(locale === "uk" ? "Доброго дня!\n\nПрошу підготувати науково-правовий висновок.\n\nТип об'єкта: [квартира/будинок/інше]\nАдреса: \nОпис ситуації: \n\nДякую!" : "Hello,\n\nI would like to request a scientific-legal conclusion.\n\nProperty type: [apartment/house/other]\nAddress: \nDescription: \n\nThank you!")}`}>
+              <Link href={`/${locale}/register`}>
                 <Button size="lg" className="bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-600 hover:to-gold-700 text-navy-900 font-bold text-base px-8 h-14 shadow-gold-glow transition-all duration-300 hover:scale-105 hover:shadow-xl w-full sm:w-auto relative overflow-hidden group">
                   <span className="absolute inset-0 bg-gradient-to-r from-gold-400 to-gold-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   <Sparkles className="mr-2 h-5 w-5 relative z-10 animate-pulse" />
-                  <span className="relative z-10">{locale === "uk" ? "Написати лист" : "Send Email"}</span>
+                  <span className="relative z-10">{locale === "uk" ? "Подати заявку" : "Submit Application"}</span>
                 </Button>
-              </a>
-              <Link href={`/${locale}#services`}>
+              </Link>
+              <Link href={`/${locale}/how-to-apply`}>
                 <Button size="lg" variant="outline" className="border-white/30 bg-white/5 text-white hover:bg-white/15 backdrop-blur-sm text-base px-8 h-14 transition-all duration-300 w-full sm:w-auto font-semibold">
-                  {t("ctaSecondary")}
+                  {locale === "uk" ? "Як це працює" : "How It Works"}
                 </Button>
               </Link>
             </div>
