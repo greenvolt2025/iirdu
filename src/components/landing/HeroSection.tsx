@@ -121,15 +121,15 @@ export default function HeroSection() {
             {/* Target audience */}
             <div className="mt-8 flex flex-wrap gap-3">
               {[
-                { icon: Users, text: locale === "uk" ? "Фізичним особам" : "Individuals" },
-                { icon: Building2, text: locale === "uk" ? "Бізнесу" : "Businesses" },
-                { icon: Landmark, text: locale === "uk" ? "Державі" : "Government" },
-                { icon: Globe, text: locale === "uk" ? "Міжнародним партнерам" : "International Partners" },
+                { icon: Users, text: locale === "uk" ? "Фізичним особам" : "Individuals", href: `/${locale}/individuals` },
+                { icon: Building2, text: locale === "uk" ? "Бізнесу" : "Businesses", href: `/${locale}/business` },
+                { icon: Landmark, text: locale === "uk" ? "Державі" : "Government", href: `/${locale}/government` },
+                { icon: Globe, text: locale === "uk" ? "Міжнародним партнерам" : "International Partners", href: `/${locale}/international` },
               ].map((item) => (
-                <div key={item.text} className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/5 border border-white/10 rounded-full text-xs text-white/50">
+                <Link key={item.text} href={item.href} className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/5 border border-white/10 rounded-full text-xs text-white/50 hover:bg-white/10 hover:border-gold-500/30 hover:text-white/70 transition-all duration-300">
                   <item.icon className="h-3 w-3" />
                   <span>{item.text}</span>
-                </div>
+                </Link>
               ))}
             </div>
           </div>

@@ -2,10 +2,9 @@ import { getTranslations } from "next-intl/server";
 import { generateFAQSchema } from "@/config/seo";
 import HeroSection from "@/components/landing/HeroSection";
 import ServicesSection from "@/components/landing/ServicesSection";
+import SegmentHubSection from "@/components/landing/SegmentHubSection";
 import RD4USection from "@/components/landing/RD4USection";
 import FeaturesSection from "@/components/landing/FeaturesSection";
-import InternationalSection from "@/components/landing/InternationalSection";
-import DonorProgramsSection from "@/components/landing/DonorProgramsSection";
 import PartnersSection from "@/components/landing/PartnersSection";
 import ProcessSection from "@/components/landing/ProcessSection";
 import TestimonialsSection from "@/components/landing/TestimonialsSection";
@@ -38,10 +37,9 @@ export default async function HomePage() {
       />
       <HeroSection />
       <ServicesSection />
+      <SegmentHubSection />
       <RD4USection />
       <FeaturesSection />
-      <InternationalSection />
-      <DonorProgramsSection />
       <PartnersSection />
       <ProcessSection />
       <TestimonialsSection />

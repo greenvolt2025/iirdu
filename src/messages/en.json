@@ -33,6 +33,22 @@
     "cta": "Submit Application",
     "ctaSecondary": "How It Works"
   },
+  "segmentHub": {
+    "title": "Who We Work With",
+    "subtitle": "Choose your path — we'll prepare the right conclusion for you",
+    "individuals": "Individuals",
+    "individualsDesc": "Apartments, houses — conclusions for RD4U and ICC from 1,000 UAH",
+    "individualsCta": "Learn more",
+    "business": "Business",
+    "businessDesc": "Damage assessment, lost profits, economic analysis using RDNA/DaLA",
+    "businessCta": "Request assessment",
+    "government": "Government",
+    "governmentDesc": "Infrastructure projects, donor programs, anti-corruption audit",
+    "governmentCta": "Submit request",
+    "international": "International Partners",
+    "internationalDesc": "Due Diligence, EU compliance (CSRD, DORA), risk assessment",
+    "internationalCta": "Schedule a call"
+  },
   "services": {
     "title": "Our Services",
     "subtitle": "We prepare scientific-legal conclusions on damage assessment and analyze risks per international standards. We accompany European partners during implementation of reconstruction programs.",
