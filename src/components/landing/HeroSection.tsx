@@ -134,48 +134,51 @@ export default function HeroSection() {
             </div>
           </div>
 
-          {/* Right: Glass card — How it works */}
+          {/* Right: Glass card — RD4U categories */}
           <div className="animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
             <div className="relative">
               {/* Main glass card */}
               <div className="glass rounded-2xl p-8 shadow-2xl">
-                <h3 className="font-serif text-xl font-bold text-white mb-6">
-                  {locale === "uk" ? "Як отримати висновок" : "How to get a conclusion"}
+                <h3 className="font-serif text-xl font-bold text-white mb-2">
+                  {locale === "uk" ? "Категорії заяв RD4U" : "RD4U Claim Categories"}
                 </h3>
+                <p className="text-xs text-white/50 mb-6">
+                  {locale === "uk" ? "Готуємо висновки для кожної категорії" : "We prepare conclusions for each category"}
+                </p>
                 <div className="space-y-5">
                   {[
                     {
-                      step: "01",
-                      titleUk: "Завантажте документи",
-                      titleEn: "Upload documents",
-                      descUk: "Фото, скани, акти, договори — через захищений канал",
-                      descEn: "Photos, scans, acts, contracts — via secure channel",
+                      icon: "A1",
+                      titleUk: "Житлова нерухомість",
+                      titleEn: "Residential property",
+                      descUk: "Квартири, будинки, дачі — документи власності + фото пошкоджень",
+                      descEn: "Apartments, houses — ownership docs + damage photos",
                     },
                     {
-                      step: "02",
-                      titleUk: "Аналіз документів",
-                      titleEn: "Document analysis",
-                      descUk: "Наші фахівці аналізують та готують проєкт висновку",
-                      descEn: "Our experts analyze and prepare a draft conclusion",
+                      icon: "A3",
+                      titleUk: "Комерційна нерухомість",
+                      titleEn: "Commercial property",
+                      descUk: "Офіси, склади, обладнання — фінзвітність + упущена вигода",
+                      descEn: "Offices, warehouses, equipment — financials + lost profits",
                     },
                     {
-                      step: "03",
-                      titleUk: "Верифікація",
-                      titleEn: "Verification",
-                      descUk: "Науковий співробітник верифікує за ДСТУ 3008:2015",
-                      descEn: "Scientific researcher verifies per DSTU 3008:2015",
+                      icon: "A3.6",
+                      titleUk: "Окуповані території",
+                      titleEn: "Occupied territories",
+                      descUk: "Втрата доступу до майна — навіть без фізичних пошкоджень",
+                      descEn: "Loss of access — even without physical damage",
                     },
                     {
-                      step: "04",
-                      titleUk: "Отримайте НПВ",
-                      titleEn: "Receive the conclusion",
-                      descUk: "Науково-правовий висновок за ДСТУ 3008:2015 у PDF",
-                      descEn: "Scientific-legal conclusion per DSTU 3008:2015 in PDF",
+                      icon: "ICC",
+                      titleUk: "Передача до панелей ICC",
+                      titleEn: "Transfer to ICC panels",
+                      descUk: "Заявки з RD4U розглядатимуться фахівцями з damage assessment",
+                      descEn: "RD4U claims reviewed by damage assessment specialists",
                     },
                   ].map((item) => (
-                    <div key={item.step} className="flex gap-4">
+                    <div key={item.icon} className="flex gap-4">
                       <div className="shrink-0 w-10 h-10 bg-gold-500/20 rounded-lg flex items-center justify-center">
-                        <span className="text-sm font-bold text-gold-400">{item.step}</span>
+                        <span className="text-[10px] font-bold text-gold-400">{item.icon}</span>
                       </div>
                       <div>
                         <h4 className="text-sm font-semibold text-white">
@@ -200,8 +203,8 @@ export default function HeroSection() {
                     <div className="text-xs text-white/50">{locale === "uk" ? "напрямків" : "areas"}</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-gold-400">AI</div>
-                    <div className="text-xs text-white/50">{locale === "uk" ? "генерація" : "generation"}</div>
+                    <div className="text-2xl font-bold text-gold-400">DaLA</div>
+                    <div className="text-xs text-white/50">{locale === "uk" ? "методика" : "method"}</div>
                   </div>
                 </div>
               </div>

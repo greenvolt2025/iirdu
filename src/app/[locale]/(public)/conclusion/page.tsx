@@ -93,7 +93,7 @@ const uk = {
   turnaroundTitle: "Строки та вартість",
   turnaroundStandard: "Стандарт — до 30 робочих днів",
   turnaroundUrgent: "Терміновий — до 10 робочих днів (×1.5)",
-  turnaroundPrice: "Від €500 залежно від типу та складності",
+  turnaroundPrice: "Вартість визначається після аналізу документів",
 
   importantTitle: "Важливо",
   importantText:
@@ -177,7 +177,7 @@ const en = {
   turnaroundTitle: "Timeline & pricing",
   turnaroundStandard: "Standard — up to 30 business days",
   turnaroundUrgent: "Urgent — up to 10 business days (×1.5)",
-  turnaroundPrice: "From €500 depending on type and complexity",
+  turnaroundPrice: "Cost determined after document analysis",
 
   importantTitle: "Important",
   importantText:

@@ -3,7 +3,7 @@ import { siteConfig } from "./site";
 export const seoConfig = {
   uk: {
     home: {
-      title: "МІВРУ — Науково-правові висновки для RD4U, ICC, ЄСПЛ | Методика RDNA",
+      title: "МІВРУ — Висновки для RD4U та ICC | Методика RDNA",
       description:
         "Готуємо висновки про збитки за методикою Світового банку RDNA/DaLA. Для квартир від 1000 грн, для будинків від 1500 грн. Офіційні звіти для RD4U, ICC, ЄСПЛ. Рада Європи рекомендує.",
       keywords:
@@ -40,7 +40,7 @@ export const seoConfig = {
   },
   en: {
     home: {
-      title: "IIRDU — Scientific-Legal Conclusions for RD4U, ICC, ECHR | RDNA Methodology",
+      title: "IIRDU — Conclusions for RD4U & ICC | RDNA Method",
       description:
         "We prepare damage conclusions using World Bank RDNA/DaLA methodology. From 1,000 UAH for apartments, 1,500 UAH for houses. Official reports for RD4U, ICC, ECHR. Council of Europe recommended.",
       keywords:

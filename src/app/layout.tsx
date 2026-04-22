@@ -45,12 +45,12 @@ export const metadata: Metadata = {
     locale: "uk_UA",
     alternateLocale: "en_US",
     siteName: "МІВРУ",
-    title: "МІВРУ — Науково-правові висновки для відшкодування збитків",
-    description: "Науково-правові висновки за методикою RDNA/DaLA Світового банку для RD4U, ЄСПЛ, ICC та суду.",
+    title: "МІВРУ — Висновки для RD4U та ICC | Методика RDNA",
+    description: "Готуємо науково-правові висновки за методикою RDNA/DaLA Світового банку для RD4U та ICC.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "МІВРУ — Науково-правові висновки для відшкодування збитків",
+    title: "МІВРУ — Висновки для RD4U та ICC | Методика RDNA",
     description: "Науково-правові висновки за методикою RDNA/DaLA для RD4U, ЄСПЛ, ICC.",
   },
   alternates: {

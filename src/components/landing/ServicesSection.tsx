@@ -94,7 +94,7 @@ export default function ServicesSection() {
   const locale = params.locale as string;
 
   return (
-    <section id="services" className="section-padding bg-white">
+    <section id="services" className="section-padding bg-slate-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Header */}
         <div className="text-center mb-16">

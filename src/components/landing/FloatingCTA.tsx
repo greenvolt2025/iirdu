@@ -97,8 +97,8 @@ export default function FloatingCTA() {
                 </div>
                 <div className="text-white/60 text-xs">
                   {locale === "uk"
-                    ? "Відповідь за 24 години • 100% прийнято"
-                    : "Response in 24 hours • 100% accepted"}
+                    ? "Відповідь за 24 години • Консультація безкоштовна"
+                    : "Response in 24 hours • Free consultation"}
                 </div>
               </div>
             </div>
