@@ -77,10 +77,10 @@ const testimonials = [
 ];
 
 const stats = [
-  { numberUk: "500+", numberEn: "500+", labelUk: "Звітів підготовлено", labelEn: "Reports prepared" },
-  { numberUk: "100%", numberEn: "100%", labelUk: "Прийнято з першого разу", labelEn: "Accepted first time" },
-  { numberUk: "€50M+", numberEn: "€50M+", labelUk: "Компенсацій отримано", labelEn: "Compensations secured" },
-  { numberUk: "40+", numberEn: "40+", labelUk: "Міжнародних партнерів", labelEn: "International partners" },
+  { numberUk: "20+", numberEn: "20+", labelUk: "Секторів економіки", labelEn: "Economic sectors" },
+  { numberUk: "0", numberEn: "0", labelUk: "Відхилень за формою", labelEn: "Formal rejections" },
+  { numberUk: "9", numberEn: "9", labelUk: "Напрямків послуг", labelEn: "Service areas" },
+  { numberUk: "6+", numberEn: "6+", labelUk: "Стандартів і методик", labelEn: "Standards & methods" },
 ];
 
 export default function TestimonialsSection() {

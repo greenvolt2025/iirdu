@@ -10,7 +10,6 @@ import PartnersSection from "@/components/landing/PartnersSection";
 import ProcessSection from "@/components/landing/ProcessSection";
 import TestimonialsSection from "@/components/landing/TestimonialsSection";
 import FAQSection from "@/components/landing/FAQSection";
-import HubPreviewSection from "@/components/landing/HubPreviewSection";
 import CTASection from "@/components/landing/CTASection";
 import FloatingCTA from "@/components/landing/FloatingCTA";
 
@@ -47,7 +46,6 @@ export default async function HomePage() {
       <ProcessSection />
       <TestimonialsSection />
       <FAQSection />
-      <HubPreviewSection />
       <CTASection />
       <FloatingCTA />
     </>

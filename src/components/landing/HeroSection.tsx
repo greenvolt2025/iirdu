@@ -76,7 +76,7 @@ export default function HeroSection() {
             <div className="flex flex-wrap items-center gap-4 mb-8 sm:mb-10">
               {[
                 { icon: Clock, text: locale === "uk" ? "Відповідь за 24 год" : "Response in 24h" },
-                { icon: CheckCircle, text: locale === "uk" ? "100% прийнято" : "100% accepted" },
+                { icon: CheckCircle, text: locale === "uk" ? "Жодного відхилення" : "Zero rejections" },
               ].map((item, i) => (
                 <div key={i} className="flex items-center gap-2 text-sm text-white/70">
                   <item.icon className="h-4 w-4 text-gold-400" />
@@ -90,8 +90,8 @@ export default function HeroSection() {
               {[
                 { icon: Award, text: "ISO 31000", color: "from-blue-500 to-indigo-600" },
                 { icon: Globe, text: "World Bank RDNA", color: "from-emerald-500 to-green-600" },
-                { icon: Shield, text: locale === "uk" ? "500+ звітів" : "500+ reports", color: "from-violet-500 to-purple-600" },
-                { icon: CheckCircle, text: locale === "uk" ? "Прийнято в ICC" : "Accepted by ICC", color: "from-amber-500 to-orange-500" },
+                { icon: Shield, text: locale === "uk" ? "RDNA / DaLA" : "RDNA / DaLA", color: "from-violet-500 to-purple-600" },
+                { icon: CheckCircle, text: locale === "uk" ? "Стандарти ICC" : "ICC Standards", color: "from-amber-500 to-orange-500" },
               ].map((badge, i) => (
                 <div
                   key={i}
