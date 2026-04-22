@@ -58,12 +58,14 @@ export default function RegisterPage() {
     setLoading(true);
     setError("");
 
-    const supabase = createClient();
-    const { error } = await supabase.auth.signUp({
-      email: form.email,
-      password: form.password,
-      options: {
-        data: {
+    // 1. Create user server-side (auto-confirms email)
+    const res = await fetch("/api/auth/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: form.email,
+        password: form.password,
+        metadata: {
           full_name: form.fullName,
           phone: form.phone,
           company_name: form.companyName,
@@ -73,7 +75,21 @@ export default function RegisterPage() {
           organization_country: form.organizationCountry || null,
           organization_type: form.organizationType || null,
         },
-      },
+      }),
+    });
+
+    const result = await res.json();
+    if (!res.ok) {
+      setError(result.error || (locale === "uk" ? "Помилка реєстрації" : "Registration failed"));
+      setLoading(false);
+      return;
+    }
+
+    // 2. Sign in to get a session
+    const supabase = createClient();
+    const { error } = await supabase.auth.signInWithPassword({
+      email: form.email,
+      password: form.password,
     });
 
     if (error) {
