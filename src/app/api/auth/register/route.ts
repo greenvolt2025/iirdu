@@ -1,12 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 
-export async function GET() {
-  const hasUrl = !!process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const hasKey = !!process.env.SUPABASE_SERVICE_ROLE_KEY;
-  return NextResponse.json({ status: "ok", hasUrl, hasKey });
-}
-
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
