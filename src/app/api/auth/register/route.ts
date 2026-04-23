@@ -1,6 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 
+export async function GET() {
+  const hasUrl = !!process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const hasKey = !!process.env.SUPABASE_SERVICE_ROLE_KEY;
+  return NextResponse.json({ status: "ok", hasUrl, hasKey });
+}
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
@@ -13,9 +19,15 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    if (!process.env.SUPABASE_SERVICE_ROLE_KEY) {
+      return NextResponse.json(
+        { error: "Server configuration error: missing service key" },
+        { status: 500 }
+      );
+    }
+
     const supabase = createAdminClient();
 
-    // Create user with auto-confirmed email (bypasses email confirmation requirement)
     const { data, error } = await supabase.auth.admin.createUser({
       email,
       password,
@@ -32,8 +44,9 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ user: { id: data.user.id, email: data.user.email } });
   } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
     return NextResponse.json(
-      { error: err instanceof Error ? err.message : "Registration failed" },
+      { error: message },
       { status: 500 }
     );
   }
